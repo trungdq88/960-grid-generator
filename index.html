@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="style.css" media="all" />
+<script src="main.js"> </script>
+<div id="input">
+  <label>
+    Columns number: <input id="colNum" type="text" value="16" onKeyUp="generate()" />
+  </label>
+  <label>
+    Column width: <input id="colWidth" type="text" value="50" onKeyUp="generate()" />
+  </label>
+  <label>
+    Space width: <input id="colSpace" type="text" value="10" onKeyUp="generate()" />
+  </label>
+</div>
+
+<div id="output">
+  Content width: <b id="contentWidth"></b>
+  Full width: <b id="fullWidth"></b>
+</div>
+
+<div id="preview"></div>
+
+<style id="css" contenteditable></style>
+<script>
+function generate() {
+  css.innerHTML = generate_grid(+colWidth.value, +colNum.value, +colSpace.value);
+
+  let html = `<div class="container_${colNum.value} sample_container">`;
+  for (let i = 1; i <= +colNum.value; i++) {
+    html += `<div class="sample_grid grid_1"></div>`;
+  }
+  html += `</div>`
+
+  preview.innerHTML = html;
+
+  contentWidth.innerText = (+colWidth.value + +colSpace.value) * +colNum.value - +colSpace.value + 'px';
+  fullWidth.innerText = (+colWidth.value + +colSpace.value) * +colNum.value + 'px';
+}
+generate();
+</script>
